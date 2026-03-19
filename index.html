@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valmir Mustafi — Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=Instrument+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0c0c0e;
+      --border: #1f1f26;
+      --accent: #e8572a;
+      --accent2:#f5a623;
+      --text:   #eaeaf0;
+      --muted:  #6e6e82;
+      --card:   #111114;
+      --serif:  'Cabinet Grotesk', sans-serif;
+      --mono:   'Instrument Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    .glow { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .glow-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(232,87,42,0.09) 0%, transparent 65%); top: -200px; left: -200px; }
+    .glow-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 65%); bottom: -100px; right: -100px; animation: drift 8s ease-in-out infinite alternate; }
+    @keyframes drift { to { transform: translate(-30px,-20px); } }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(12,12,14,0.88);
+      backdrop-filter: blur(14px);
+    }
+    .nav-logo { font-family: var(--serif); font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    #hero {
+      position: relative; z-index: 1;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 3rem 5rem; max-width: 960px;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 2.2rem;
+      opacity: 0; animation: slideIn 0.55s 0.15s ease-out forwards;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    h1 {
+      font-family: var(--serif); font-size: clamp(3.2rem, 8.5vw, 7rem);
+      font-weight: 800; line-height: 0.93; letter-spacing: -0.04em; margin-bottom: 1.8rem;
+      opacity: 0; animation: slideIn 0.55s 0.3s ease-out forwards;
+    }
+    h1 .ghost { color: transparent; -webkit-text-stroke: 1px rgba(234,234,240,0.2); }
+    h1 .fire  { color: var(--accent); -webkit-text-stroke: 0; }
+    .hero-sub {
+      font-size: 0.9rem; color: var(--muted); max-width: 520px; line-height: 1.8; margin-bottom: 3rem;
+      opacity: 0; animation: slideIn 0.55s 0.45s ease-out forwards;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 400; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: slideIn 0.55s 0.6s ease-out forwards; }
+    .btn { display: inline-block; padding: 0.7rem 1.7rem; text-decoration: none; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.07em; border-radius: 3px; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+    @keyframes slideIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    section { position: relative; z-index: 1; padding: 6rem 3rem; max-width: 960px; margin: 0 auto; }
+    .s-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+    .s-label::before { content: '//'; opacity: 0.5; }
+    h2 { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2.8rem; line-height: 1.1; }
+
+    .identity { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 2.8rem; }
+    .id-cell { background: var(--card); padding: 1.4rem 1.2rem; }
+    .id-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .id-val { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--text); }
+
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.88rem; }
+    .about-text p strong { color: var(--text); font-weight: 400; }
+
+    .skills-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-row { display: flex; align-items: center; gap: 0.9rem; padding: 0.55rem 0.9rem; background: var(--card); border: 1px solid var(--border); border-radius: 3px; font-size: 0.78rem; color: var(--muted); transition: border-color 0.2s, color 0.2s, transform 0.2s; cursor: default; }
+    .skill-row:hover { border-color: var(--accent); color: var(--text); transform: translateX(4px); }
+    .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .skill-cat { margin-left: auto; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(110,110,130,0.5); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(270px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .proj-card { background: var(--card); padding: 1.6rem; text-decoration: none; display: block; transition: background 0.2s; position: relative; }
+    .proj-card:hover { background: #18181d; }
+    .proj-card:hover .proj-arrow { opacity: 1; transform: translate(2px,-2px); }
+    .proj-num { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.8rem; opacity: 0.7; }
+    .proj-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.6rem; display: flex; align-items: start; justify-content: space-between; gap: 0.5rem; }
+    .proj-arrow { flex-shrink: 0; width: 14px; height: 14px; opacity: 0.3; transition: opacity 0.2s, transform 0.2s; }
+    .proj-desc { color: var(--muted); font-size: 0.8rem; line-height: 1.7; margin-bottom: 1.3rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tag { font-size: 0.65rem; padding: 0.18rem 0.55rem; border-radius: 2px; background: rgba(232,87,42,0.08); color: var(--accent); border: 1px solid rgba(232,87,42,0.18); letter-spacing: 0.06em; }
+
+    .community-card { border: 1px solid var(--border); border-radius: 4px; background: var(--card); padding: 2rem 2.2rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center; margin-bottom: 1.2rem; }
+    .community-title { font-family: var(--serif); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .community-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.7; }
+    .community-stat { text-align: center; padding: 1rem 1.5rem; border: 1px solid var(--border); border-radius: 3px; background: #0c0c0e; }
+    .stat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.25rem; }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    #contact { border-top: 1px solid var(--border); }
+    .contact-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .c-link { display: flex; align-items: center; gap: 0.6rem; color: var(--muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .c-link:hover { color: var(--accent); }
+
+    footer { position: relative; z-index: 1; text-align: center; padding: 2rem 3rem; color: var(--muted); font-size: 0.72rem; border-top: 1px solid var(--border); }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s, transform 0.65s; }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.07s; }
+    .d2 { transition-delay: 0.14s; }
+
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-layout, .identity { grid-template-columns: 1fr; }
+      .community-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">valmir<em>.</em>dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <span class="hero-eyebrow">Open to opportunities &middot; Jesi (AN), Marche</span>
+  <h1>Code.<br><span class="ghost">Circuits.</span><br><span class="fire">Community.</span></h1>
+  <p class="hero-sub">
+    I'm Valmir — a <strong>mechatronic technician turned web developer</strong>.
+    I've reprogrammed ECUs, managed a national automotive community,
+    and completed Harvard's CS50W. Now I build for the web,
+    with the same hands-on precision I bring to everything else.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">See my work</a>
+    <a href="#contact" class="btn btn-ghost">Get in touch</a>
+  </div>
+</section>
+
+<section id="about">
+  <p class="s-label">about</p>
+  <h2>A background that<br>doesn't fit a box.</h2>
+  <div class="identity reveal">
+    <div class="id-cell"><div class="id-label">Age</div><div class="id-val">30</div></div>
+    <div class="id-cell"><div class="id-label">Base</div><div class="id-val">Jesi, Marche</div></div>
+    <div class="id-cell"><div class="id-label">Background</div><div class="id-val">Mechatronics</div></div>
+  </div>
+  <div class="about-layout">
+    <div class="about-text reveal d1">
+      <p>I trained as a <strong>mechatronic technician</strong> — 532 hours of electrical engineering, electrotechnics, and mechanical theory. That means I understand what happens both on screen and inside the hardware.</p>
+      <p>I can <strong>open an ECU, replace capacitors, and flash custom maps</strong> with TunerPro. I've read engineering manuals the way most people read novels. I know what a signal is before it becomes code.</p>
+      <p>I got into programming because I've always <strong>built things</strong>. Web development is just the latest medium — and the one with the lowest barrier between an idea and something real.</p>
+      <p>Currently deepening my knowledge of <strong>Python, Django, and JavaScript</strong>, with a CS50W certification from Harvard under my belt.</p>
+    </div>
+    <div class="skills-list reveal d2">
+      <div class="skill-row"><span class="skill-dot"></span>Python<span class="skill-cat">Dev</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>JavaScript / HTML / CSS<span class="skill-cat">Dev</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>SQL &amp; Databases<span class="skill-cat">Dev</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>Java<span class="skill-cat">Dev</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>ECU Remapping (TunerPro)<span class="skill-cat">Mech</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>Electrotechnics<span class="skill-cat">Mech</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>Mechatronics (532h cert.)<span class="skill-cat">Mech</span></div>
+      <div class="skill-row"><span class="skill-dot"></span>Git &amp; GitHub<span class="skill-cat">Dev</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="s-label">projects</p>
+  <h2>Things I've shipped.</h2>
+  <div class="projects-grid">
+    <a href="https://github.com/valmirmustafi1995-stack/portfolio" class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-title">Portfolio<svg class="proj-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      <div class="proj-desc">This website — designed and coded from scratch. One file, no frameworks, deployed on GitHub Pages.</div>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    </a>
+    <a href="https://github.com/valmirmustafi1995-stack/expense-tracker" class="proj-card reveal d1">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Expense Tracker<svg class="proj-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      <div class="proj-desc">Track daily expenses by category with a dashboard. Data stored locally via Flask + SQLite.</div>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLite</span></div>
+    </a>
+    <a href="https://github.com/valmirmustafi1995-stack/link-shortener" class="proj-card reveal d2">
+      <div class="proj-num">03</div>
+      <div class="proj-title">Link Shortener<svg class="proj-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      <div class="proj-desc">Minimal URL shortener with click analytics. Enter a long URL, get a short one, track visits.</div>
+      <div class="proj-tags"><span class="tag">Django</span><span class="tag">PostgreSQL</span><span class="tag">REST API</span></div>
+    </a>
+  </div>
+</section>
+
+<section id="community">
+  <p class="s-label">community</p>
+  <h2>Beyond the keyboard.</h2>
+  <div class="community-card reveal">
+    <div>
+      <div class="community-title">All Stars DSM Italia</div>
+      <div class="community-desc">
+        I founded and manage the largest Italian community for <strong style="color:var(--text);font-weight:400">Eclipse &amp; DSM owners</strong> —
+        active since before COVID and now a national reference point for anyone owning one of these cars in Italy.
+        We organise meetups, and maintain a <strong style="color:var(--text);font-weight:400">curated Google Drive archive</strong>:
+        wiring diagrams, ECU maps, repair guides — an invaluable resource built from collective knowledge.
+        Running a community is product management before you learn the term.
+      </div>
+    </div>
+    <div class="community-stat">
+      <div class="stat-num">60+</div>
+      <div class="stat-label">Members</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="s-label">contact</p>
+  <h2 class="reveal">Let's build something.</h2>
+  <p class="reveal d1" style="color:var(--muted);max-width:420px;font-size:0.87rem">
+    I'm actively looking for my first dev role.
+    Whether you have a project, a question, or just want to talk code — reach out.
+  </p>
+  <div class="contact-row reveal d2">
+    <a href="mailto:valmirmustafi1995@gmail.com" class="c-link">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+      valmirmustafi1995@gmail.com
+    </a>
+    <a href="https://github.com/valmirmustafi1995-stack" class="c-link">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      valmirmustafi1995-stack
+    </a>
+    <a href="https://www.linkedin.com/in/valmir-mustafi-/" class="c-link">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>designed &amp; built by <strong>Valmir Mustafi</strong> &mdash; Jesi (AN), Marche &mdash; 2026</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
